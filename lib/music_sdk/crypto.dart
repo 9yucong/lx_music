@@ -22,7 +22,7 @@ class Crypto {
     String result = base64ToHex(encrypter.encrypt(data, iv: iv).base64).toUpperCase();
     Log.d('aes result = ${encrypter.encrypt(data, iv: iv).base64}');
     Log.d('eapi result = $result');
-    return '';
+    return result;
   }
 
   static String base64ToHex(String source) =>
