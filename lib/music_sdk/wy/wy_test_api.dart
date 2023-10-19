@@ -1,8 +1,11 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:lx_music/common/log.dart';
 import 'package:lx_music/music_sdk/api.dart';
 import 'package:lx_music/music_sdk/crypto.dart';
+
+import '../model/wy_search_response_entity.dart';
 
 class WyTestApi extends Api {
   @override
@@ -17,8 +20,8 @@ class WyTestApi extends Api {
   }
 
   @override
-  Future<String> searchMusic(String key,
-      {int type = 1, int limit = 30, int page = 1}) async {
+  Future<List<WySearchResponseResultSongs>?> searchMusic(String key,
+      {int type = 1, int limit = 20, int page = 1}) async {
     final formObject = {
       's': key,
       'type': type,
@@ -26,8 +29,7 @@ class WyTestApi extends Api {
       'total': page == 1,
       'offset': limit * (page - 1)
     };
-
-    Map<String, dynamic> map = Map();
+    Map<String, dynamic> map = {};
     map['params'] = Crypto.eapi('/api/cloudsearch/pc', json.encode(formObject));
     Response response =
         await dio.post('http://interface.music.163.com/eapi/batch',
@@ -40,6 +42,6 @@ class WyTestApi extends Api {
               "family": 4,
             }),
             data: map);
-    return response.toString();
+    return WySearchResponseEntity.fromJson(response.data).result?.songs;
   }
 }

@@ -12,7 +12,5 @@ import 'package:lx_music/music_sdk/wy/wy_test_api.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    WyTestApi wyTestApi = WyTestApi();
-    wyTestApi.searchMusic('枫');
   });
 }

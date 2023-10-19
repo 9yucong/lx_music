@@ -9,8 +9,6 @@ import 'routes/route_playlist_detail.dart';
 
 void main() {
   Global.init().then((e) => runApp(const MainApp()));
-  WyTestApi wyTestApi = WyTestApi();
-  wyTestApi.searchMusic('yg');
 }
 
 final _routerConfig = GoRouter(
